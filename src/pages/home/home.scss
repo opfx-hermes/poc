@@ -1,3 +1,14 @@
 page-home {
-
+    .row {
+       border-left: 2px solid DodgerBlue
+       
+    } 
+    .lowercase {
+        text-transform: lowercase;
+        font-size: 18px;
+        
+    } 
+    .join{
+        width:55px;
+    }
 }

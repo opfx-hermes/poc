@@ -1,14 +1,64 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
     <ion-title>
-      Ionic Blank
+      Fantasy Sports 
     </ion-title>
+    <ion-buttons right> 
+        <button class="lowercase"ion-button item-end icon-right  (click)="onLogIn($event)">
+            log in
+          </button>     
+      <button ion-button icon-only color="royal" 
+              (tap)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>        
+    </ion-buttons>     
   </ion-navbar>
+  
+      <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
+        <ion-segment-button value="new contests">
+            New Contests
+        </ion-segment-button>
+        <ion-segment-button value="in play">
+            In Play
+        </ion-segment-button>
+        <ion-segment-button value="past contests">
+            Past Contests
+        </ion-segment-button>
+      </ion-segment>
+      
 </ion-header>
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+      <ion-card>
+        <ion-list *ngFor="let k of _poolList" >
+          <button  ion-item (click)="rowInListClicked($event)">
+            <ion-grid text-left>
+              <ion-row class="row">
+                <ion-col >{{k.poolName}} <p>additional info goes here</p></ion-col>
+                <ion-col >{{k.poolTime}} <p>time info</p></ion-col>
+                <ion-col >{{k.prize}}    <p>prize info</p></ion-col>
+              </ion-row>
+            </ion-grid>
+            <button class="join" ion-button outline  item-end (click)="joinPool($event)">
+              {{k.joinTitle}}  {{k.ticket}}
+            </button>
+
+          </button>
+        </ion-list>
+      </ion-card>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+      <ion-title>future content </ion-title>
+    </ion-toolbar>
+</ion-footer>

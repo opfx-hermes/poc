@@ -6,36 +6,39 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import {SongsModule} from '../modules/songs/songs.module';
-
-import {env} from '../env/env';
-
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { LogInPage } from '../pages/log-in/log-in';
+import { LogOutPage } from '../pages/log-out/log-out';
+import { NotificationProvider } from '../providers/notification/notification';
+import { PopoverPageComponent } from '../components/popover-page/popover-page';
+import { SignInPage } from '../pages/sign-in/sign-in';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    LogInPage,
+    LogOutPage,
+    SignInPage,
+    PopoverPageComponent
   ],
   imports: [
     BrowserModule,
-    SongsModule,
-    IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(env.firebase),
-    AngularFireAuthModule,
-    AngularFireDatabaseModule,
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    LogInPage,
+    LogOutPage,
+    SignInPage,
+    PopoverPageComponent
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    NotificationProvider
   ]
 })
 export class AppModule {}
